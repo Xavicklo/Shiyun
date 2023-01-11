@@ -45,7 +45,7 @@ import product7 from "./product7.jpg";
 import product8 from "./product8.jpg";
 
 export const gridOrderImage = (props) => (
-  <div classname="bg-white dark:bg-secondary-dark-bg">
+  <div className="bg-white dark:bg-secondary-dark-bg">
     <img
       className="rounded-xl h-20 md:ml-3"
       src={props.ProductImage}
@@ -54,16 +54,51 @@ export const gridOrderImage = (props) => (
   </div>
 );
 
-export const gridOrderStatus = (props) => (
+export const gridCurrentState = (props) => (
   <button
     type="button"
-    style={{ background: props.StatusBg }}
-    className="text-white py-1 px-2 capitalize rounded-2xl text-md"
+    className={`text-gray-700 py-1 px-2 capitalize rounded-2xl text-md ${props.currentState==="accepted" ? 'bg-lime-400' : 'bg-pink-400'}`}
   >
-    {props.Status}
+    {props.currentState}
+  </button>
+);
+export const gridPaymentType = (props) => (
+  <button
+    type="button"
+    className={`text-gray-900 py-1 px-2 capitalize rounded-2xl text-md ${props.paymentType==="現金" ? 'bg-yellow-300' : 'bg-orange-500'}`}
+  >
+    {props.paymentType}
   </button>
 );
 
+export const gridMealType = (props) => (
+  <button
+    type="button"
+    className={`text-white py-1 px-2 capitalize rounded-2xl text-md ${
+      props.mealType === "外送" ? "bg-purple-500" : "bg-sky-500"} `}
+  >
+    {props.mealType}
+  </button>
+);
+
+export const gridGender = (props) => (
+  <button
+    type="button"
+    className={`text-white py-1 px-2 capitalize rounded-2xl text-md ${
+      props.gender === "Male" ? "bg-sky-500" : "bg-pink-500"} `}
+  >
+    {props.gender}
+  </button>
+);
+export const gridPosition = (props) => (
+  <button
+    type="button"
+    className={`text-white py-1 px-2 capitalize rounded-2xl text-md ${
+      props.position === "Full Time" ? "bg-purple-700" : "bg-violet-400"} `}
+  >
+    {props.position}
+  </button>
+);
 export const kanbanGrid = [
   { headerText: "To Do", keyField: "Open", allowToggle: true },
 
@@ -412,94 +447,99 @@ export const LinePrimaryYAxis = {
 export const customersGrid = [
   { type: "checkbox", width: "50" },
   {
+    headerText: "Customer ID",
+    field: "customerId",
+    width: "150",
+    textAlign: "Center",
+  },
+  {
+    field: "name",
     headerText: "Name",
     width: "150",
-    template: customerGridImage,
     textAlign: "Center",
   },
   {
-    field: "ProjectName",
-    headerText: "Project Name",
-    width: "150",
-    textAlign: "Center",
-  },
-  {
-    field: "Status",
-    headerText: "Status",
-    width: "130",
-    format: "yMd",
-    textAlign: "Center",
-    template: customerGridStatus,
-  },
-  {
-    field: "Weeks",
-    headerText: "Weeks",
+    field: "age",
+    headerText: "Age",
     width: "100",
-    format: "C2",
     textAlign: "Center",
   },
   {
-    field: "Budget",
-    headerText: "Budget",
+    field: "gender",
+    headerText: "Gender", 
     width: "100",
-    format: "yMd",
+    template: gridGender,
     textAlign: "Center",
   },
-
   {
-    field: "Location",
-    headerText: "Location",
+    field: `phoneNumber`,
+    headerText: "Phone Number",
     width: "150",
     textAlign: "Center",
   },
 
   {
-    field: "CustomerID",
-    headerText: "Customer ID",
+    field: "createdTs",
+    headerText: "Created Times",
+    width: "150",
+    textAlign: "Center",
+  },
+
+  {
+    field: "orderId",
+    headerText: "Order ID",
     width: "120",
     textAlign: "Center",
-    isPrimaryKey: true,
   },
 ];
 
 export const employeesGrid = [
   {
-    field: "address.zipcode",
+    field: "employeeId",
     headerText: "Employee ID",
     width: "125",
     textAlign: "Center",
   },
   {
     headerText: "Employee Name",
-    headerTextAlign: "Center",
+    field:"name",
     width: "130",
-    template: gridEmployeeName,
-    backgroundColor: "#f5f5f5",
     textAlign: "Center",
   },
-  { field: "Name", headerText: "", width: "0", textAlign: "Center" },
   {
-    headerText: "Email Address",
+    headerText: "Phone Number",
+    field: "phoneNumber",
     width: "140",
     textAlign: "Center",
-    template: gridEmployeeEmail,
   },
   {
-    field: "phone",
-    headerText: "Phone Number",
+    field: "entryDay",
+    headerText: "Entry Day",
     width: "170",
     textAlign: "Center",
   },
   {
-    field: "address.street",
-    headerText: "Last Company",
+    field: "position",
+    headerText: "Position",
     width: "135",
     textAlign: "Center",
+    template: gridPosition,
   },
-
   {
-    field: "address.city",
-    headerText: "City",
+    field: "createdTs",
+    headerText: "Created Times",
+    width: "120",
+    textAlign: "Center",
+  },
+  {
+    field: "address",
+    headerText: "Address",
+    width: "120",
+    textAlign: "Center",
+  },
+  {
+    field: "salary",
+    headerText: "Salary",
     width: "120",
     textAlign: "Center",
   },
@@ -537,7 +577,7 @@ export const links = [
     links: [
       {
         name: "Orders",
-        look: "Reservations",
+        look: "Orders",
         icon: <AiOutlineShoppingCart />,
       },
       {
@@ -661,37 +701,37 @@ export const chatData = [
 export const earningData = [
   {
     icon: <MdOutlineSupervisorAccount />,
-    amount: "39,354.00",
-    percentage: "-4.39%",
-    title: "Customers",
-    iconColor: "#03C9D7",
-    iconBg: "#E5FAFB",
-    pcColor: "#DC2638",
-  },
-  {
-    icon: <BsBoxSeam />,
-    amount: "4,396.00",
-    percentage: "+23.14%",
-    title: "Products",
-    iconColor: "rgb(255, 244, 229)",
-    iconBg: "rgb(254, 201, 15)",
-    pcColor: "#16a34a",
-  },
-  {
-    icon: <FiBarChart />,
-    amount: "423,39.00",
-    percentage: "+38.07%",
-    title: "Sales",
+    amount: "17,182",
+    percentage: "+12.07%",
+    title: "顧客數",
     iconColor: "rgb(228, 106, 118)",
     iconBg: "rgb(255, 244, 229)",
 
     pcColor: "#16a34a",
   },
   {
+    icon: <FiBarChart />,
+    amount: "2,675",
+    percentage: "+4.39%",
+    title: "訂單數",
+    iconColor: "#03C9D7",
+    iconBg: "#E5FAFB",
+    pcColor: "#DC2638",
+  },
+  {
+    icon: <BsBoxSeam />,
+    amount: "$72,596",
+    percentage: "+23.14%",
+    title: "線上支付: 總金額",
+    iconColor: "rgb(255, 244, 229)",
+    iconBg: "rgb(254, 201, 15)",
+    pcColor: "#16a34a",
+  },
+  {
     icon: <HiOutlineRefresh />,
-    amount: "39,354.00",
-    percentage: "-12.82%",
-    title: "Refunds",
+    amount: "1,548",
+    percentage: "38.82%",
+    title: "NFT訂購會員數",
     iconColor: "rgb(0, 194, 146)",
     iconBg: "rgb(235, 250, 242)",
     pcColor: "#DC2638",
@@ -701,7 +741,7 @@ export const earningData = [
 export const recentTransactions = [
   {
     icon: <BsCurrencyDollar />,
-    amount: "+$350",
+    amount: "+$35,231",
     title: "Paypal Transfer",
     desc: "Money Added",
     iconColor: "#03C9D7",
@@ -710,7 +750,7 @@ export const recentTransactions = [
   },
   {
     icon: <BsShield />,
-    amount: "-$560",
+    amount: "-$16,900",
     desc: "Bill Payment",
     title: "Wallet",
     iconColor: "rgb(0, 194, 146)",
@@ -719,7 +759,7 @@ export const recentTransactions = [
   },
   {
     icon: <FiCreditCard />,
-    amount: "+$350",
+    amount: "+$31,877",
     title: "Credit Card",
     desc: "Money reversed",
     iconColor: "rgb(255, 244, 229)",
@@ -729,7 +769,7 @@ export const recentTransactions = [
   },
   {
     icon: <TiTick />,
-    amount: "+$350",
+    amount: "+$49,080",
     title: "Bank Transfer",
     desc: "Money Added",
 
@@ -739,7 +779,7 @@ export const recentTransactions = [
   },
   {
     icon: <BsCurrencyDollar />,
-    amount: "-$50",
+    amount: "-$4,803",
     percentage: "+38%",
     title: "Refund",
     desc: "Payment Sent",
@@ -752,23 +792,23 @@ export const recentTransactions = [
 export const weeklyStats = [
   {
     icon: <FiShoppingCart />,
-    amount: "-$560",
+    amount: "+$5,779",
     title: "Top Sales",
     desc: "Johnathan Doe",
     iconBg: "#FB9678",
-    pcColor: "red-600",
+    pcColor: "green-600",
   },
   {
     icon: <FiStar />,
-    amount: "-$560",
+    amount: "+$3,661",
     title: "Best Seller",
     desc: "MaterialPro Admin",
     iconBg: "rgb(254, 201, 15)",
-    pcColor: "red-600",
+    pcColor: "green-600",
   },
   {
     icon: <BsChatLeft />,
-    amount: "+$560",
+    amount: "+$1,658",
     title: "Most Commented",
     desc: "Ample Admin",
     iconBg: "#00C292",
@@ -911,50 +951,105 @@ export const userProfileData = [
 
 export const ordersGrid = [
   {
-    headerText: "Image",
-    template: gridOrderImage,
+    headerText: "Order ID",
+    field: "orderId",
+    textAlign: "Center",
+    width: "80",
+  },
+  {
+    headerText: "Current State",
+    field: "currentState",
+    template: gridCurrentState,
     textAlign: "Center",
     width: "120",
   },
   {
-    field: "OrderItems",
-    headerText: "Item",
-    width: "150",
+    field: "customer_id",
+    headerText: "Customer ID",
+    width: "100",
     editType: "dropdownedit",
     textAlign: "Center",
   },
   {
-    field: "CustomerName",
-    headerText: "Customer Name",
-    width: "150",
+    field: "amount",
+    headerText: "Amount",
+    width: "80",
     textAlign: "Center",
   },
   {
-    field: "TotalAmount",
-    headerText: "Total Amount",
-    format: "C2",
+    field: "mealType",
+    headerText: "Meal Type",
+    template: gridMealType,
     textAlign: "Center",
-    editType: "numericedit",
-    width: "150",
+    // editType: "numericedit",
+    width: "100",
   },
   {
-    headerText: "Status",
-    template: gridOrderStatus,
-    field: "OrderItems",
-    textAlign: "Center",
-    width: "120",
-  },
-  {
-    field: "OrderID",
-    headerText: "Order ID",
-    width: "120",
+    field: "paymentType",
+    headerText: "Payment",
+    template: gridPaymentType,
+    width: "100",
     textAlign: "Center",
   },
 
   {
-    field: "Location",
-    headerText: "Location",
-    width: "150",
+    field: "itemId",
+    headerText: "Item Name",
+    width: "100",
+    textAlign: "Center",
+  },
+  {
+    field: "orderNumber",
+    headerText: "Order No",
+    width: "100",
+    textAlign: "Center",
+  },
+];
+export const InventoryGrid = [
+  {
+    headerText: "Inventory ID",
+    field: "inventoryId",
+    textAlign: "Center",
+    width: "100",
+  },
+  {
+    headerText: "Item Name",
+    field: "title",
+    textAlign: "Center",
+    width: "100",
+  },
+  {
+    field: "price",
+    headerText: "Price",
+    width: "100",
+    textAlign: "Center",
+  },
+  {
+    field: "quantity",
+    headerText: "Quantity",
+    width: "100",
+    textAlign: "Center",
+  },
+  {
+    field: "orderDate",
+    headerText: "Order Date",
+    // template: gridMealType,
+    textAlign: "Center",
+    // editType: "numericedit",
+    width: "100",
+  },
+  {
+    field: "arrivalDate",
+    headerText: "Arrival Date",
+    // template: gridPaymentType,
+    width: "100",
+    textAlign: "Center",
+  },
+
+  {
+    field: "expirationDate",
+    headerText: "Expiration Date",
+    width: "100",
     textAlign: "Center",
   },
 ];
@@ -3054,7 +3149,7 @@ export const lineCustomSeries = [
     dataSource: lineChartData[0],
     xName: "x",
     yName: "y",
-    name: "Bitcoin",
+    name: "全世界第一個炸雞排 The world's first fried chicken chop",
     width: "2",
     marker: { visible: true, width: 5, height: 5 },
     type: "Line",
@@ -3064,7 +3159,7 @@ export const lineCustomSeries = [
     dataSource: lineChartData[1],
     xName: "x",
     yName: "y",
-    name: "Ethereum",
+    name: "全世界第一個鹽酥雞（黑）The first Taiwanese fried chicken shop",
     width: "2",
     marker: { visible: true, width: 5, height: 5 },
     type: "Line",
@@ -3074,7 +3169,7 @@ export const lineCustomSeries = [
     dataSource: lineChartData[2],
     xName: "x",
     yName: "y",
-    name: "Tether",
+    name: "全世界第一個鹽酥雞（紅）The first Taiwanese fried chicken shop",
     width: "2",
     marker: { visible: true, width: 5, height: 5 },
     type: "Line",
@@ -3083,7 +3178,7 @@ export const lineCustomSeries = [
     dataSource: lineChartData[3],
     xName: "x",
     yName: "y",
-    name: "BNB",
+    name: "杏鮑菇 king trumpet mushroom(Limited to 80 pieces)",
     width: "2",
     marker: { visible: true, width: 5, height: 5 },
     type: "Line",
@@ -3092,7 +3187,7 @@ export const lineCustomSeries = [
     dataSource: lineChartData[4],
     xName: "x",
     yName: "y",
-    name: "XRP",
+    name: "炸魷魚(全球首發) fried squid (World premiere)",
     width: "2",
     marker: { visible: true, width: 5, height: 5 },
     type: "Line",
@@ -3102,7 +3197,7 @@ export const lineCustomSeries = [
     dataSource: lineChartData[5],
     xName: "x",
     yName: "y",
-    name: "Dogecoin",
+    name: "多點九層塔 more fride basil",
     width: "2",
     marker: { visible: true, width: 5, height: 5 },
     type: "Line",

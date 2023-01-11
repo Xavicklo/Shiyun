@@ -37,11 +37,11 @@ const Ecommerce = () => {
   return (
     <div className="mt-24">
       <div className="flex flex-wrap lg:flex-nowrap justify-center ">
-        <div className="bg-white dark:text-gray-200 h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-no-repeat bg-cover bg-center">
+        <div className="bg-white dark:text-gray-200 h-44 rounded-xl w-full lg:w-80 p-8 pt-6 m-3 bg-no-repeat bg-cover bg-center">
           <div className="flex justify-between items-center">
             <div>
-              <p className="font-bold text-gray-800">Earnings</p>
-              <p className="text-2xl text-gray-600">$ 63,500.00</p>
+              <p className="text-xl font-bold text-gray-800 mb-2">營業額</p>
+              <p className="text-4xl ml-2 text-gray-600">$886,457</p>
             </div>
             <button
               type="button"
@@ -51,7 +51,7 @@ const Ecommerce = () => {
               <BsCurrencyDollar />
             </button>
           </div>
-          <div className="mt-6">
+          <div className="mt-3">
             <Button
               color="white"
               bgColor={currentColor}
@@ -110,7 +110,7 @@ const Ecommerce = () => {
                 <span>
                   <GoPrimitiveDot />
                 </span>
-                <span>Budget</span>
+                <span>Earnings</span>
               </p>
             </div>
           </div>
@@ -131,7 +131,7 @@ const Ecommerce = () => {
                     +4.39%
                   </span>
                 </p>
-                <p className="text-gray-500 mt-1">Budget</p>
+                <p className="text-gray-500 mt-1">Earnings</p>
               </div>
               <div className="mt-8">
                 <span className="text-3xl font-semibold text-gray-600 dark:text-gray-200">
@@ -185,7 +185,7 @@ const Ecommerce = () => {
 
               <div>
                 <p className="text-2xl text-white font-semibold mt-8">
-                  $ 63,500.00
+                  $ 374,550
                 </p>
                 <p className="text-gray-200">Monthly revenue</p>
               </div>
@@ -269,7 +269,7 @@ const Ecommerce = () => {
         </div>
         <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
           <div className="flex justify-between items-center gap-2 mb-10">
-            <p className="text-xl font-semibold">Crypto Overview in 3 Months</p>
+            <p className="text-xl font-semibold">Shiyun NFT Overview in 3 Months</p>
             <DropDown currentMode={currentMode} />
           </div>
           <div className="md:w-full overflow-auto">

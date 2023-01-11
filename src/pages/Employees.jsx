@@ -17,18 +17,100 @@ const Employees = () => {
 
   const editing = { allowDeleting: true, allowEditing: true };
   const [employees, setEmployees] = useState([]);
+  const [employee, setEmployee] = React.useState({
+    name: "",
+    phoneNumber: "",
+    entryDay: "",
+    position: "",
+    createdTs: "",
+    address: "",
+    salary: "",
+  });
+  const handleChange = (e) => {
+    setEmployee((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        "https://shiyun-production.up.railway.app/orders",
+        employee
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
     axios
-      .get("https://jsonplaceholder.typicode.com/users")
+      .get("https://shiyun-production.up.railway.app/employees")
       .then((res) => {
-        console.log(res.data);
-        setEmployees(res.data);
+        console.log(res.data.result);
+        setEmployees(res.data.result);
       })
       .catch((err) => console.log(err));
   }, []);
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Management" title="Employees" />
+      <div className="flex items-end mb-3 justify-between">
+        <Header category="Management" title="Employees" />
+        <div className="justify-end">
+          <input
+            type="text"
+            name="name"
+            onChange={handleChange}
+            className="text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full items-end mt-12 mr-3 h-8 py-1 px-2 w-28"
+            placeholder="Name"
+            required
+          />
+          <input
+            type="text"
+            name="entryDay"
+            onChange={handleChange}
+            className="text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full items-end mt-12 mr-3 h-8 py-1 px-2 w-28"
+            placeholder="Entry Day"
+            required
+          />
+          <input
+            type="text"
+            name="position"
+            onChange={handleChange}
+            className="text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full items-end mt-12 mr-3 h-8 py-1 px-2 w-24"
+            placeholder="Position"
+            required
+          />
+          <input
+            type="text"
+            name="createdTs"
+            onChange={handleChange}
+            className="text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full items-end mt-12 mr-3 h-8 py-1 px-2 w-32"
+            placeholder="Created Time"
+            required
+          />
+          <input
+            type="text"
+            name="address"
+            onChange={handleChange}
+            className="text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full items-end mt-12 mr-3 h-8 py-1 px-2 w-28"
+            placeholder="Address"
+            required
+          />
+          <input
+            type="text"
+            name="salary"
+            onChange={handleChange}
+            className="text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full items-end mt-12 mr-3 h-8 py-1 px-2 w-28"
+            placeholder="Salary"
+            required
+          />
+          <button
+            onClick={handleClick}
+            className="items-end text-white mt-12 mr-3 h-8 w-32 py-1 px-2 capitalize rounded-2xl text-md bg-red-700 "
+          >
+            Add Employee
+          </button>
+        </div>
+      </div>
       <GridComponent
         dataSource={employees}
         width="auto"
