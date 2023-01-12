@@ -65,6 +65,14 @@ const Employees = () => {
           />
           <input
             type="text"
+            name="phoneNumber"
+            onChange={handleChange}
+            className="text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full items-end mt-12 mr-3 h-8 py-1 px-2 w-28"
+            placeholder="Phone Number"
+            required
+          />
+          <input
+            type="text"
             name="entryDay"
             onChange={handleChange}
             className="text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full items-end mt-12 mr-3 h-8 py-1 px-2 w-28"
