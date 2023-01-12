@@ -37,7 +37,7 @@ const Customers = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://shiyun-production.up.railway.app/customers",
+        "https://shiyun-production.up.railway.app/customer",
         customer
       );
       console.log(res);

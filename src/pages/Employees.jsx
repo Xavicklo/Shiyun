@@ -33,7 +33,7 @@ const Employees = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "https://shiyun-production.up.railway.app/orders",
+        "https://shiyun-production.up.railway.app/employee",
         employee
       );
       console.log(res);
